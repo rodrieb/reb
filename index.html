@@ -590,6 +590,147 @@
       .contact-title { font-size: 38px; }
       .about-left h2 { font-size: 32px; }
     }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background: rgba(10, 8, 6, 0.96);
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    .lightbox.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .lightbox-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      flex-shrink: 0;
+    }
+    .lightbox-title {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 300;
+      color: #fff;
+      letter-spacing: 0.02em;
+    }
+    .lightbox-desc {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-top: 4px;
+    }
+    .lightbox-close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: rgba(255,255,255,0.5);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: color 0.2s;
+      padding: 8px;
+    }
+    .lightbox-close:hover { color: #fff; }
+    .lightbox-close-icon {
+      width: 20px; height: 20px;
+      position: relative;
+    }
+    .lightbox-close-icon::before,
+    .lightbox-close-icon::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 0;
+      width: 100%; height: 1px;
+      background: currentColor;
+    }
+    .lightbox-close-icon::before { transform: rotate(45deg); }
+    .lightbox-close-icon::after { transform: rotate(-45deg); }
+
+    .lightbox-body {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 32px;
+    }
+
+    .lightbox-media {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: block;
+      transition: opacity 0.3s ease;
+    }
+    .lightbox-media.fading { opacity: 0; }
+
+    .lightbox-video {
+      max-width: 100%;
+      max-height: 100%;
+      display: block;
+    }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.5);
+      font-family: var(--font-mono);
+      font-size: 18px;
+      width: 44px; height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .lightbox-nav:hover { border-color: #fff; color: #fff; }
+    .lightbox-nav.prev { left: 16px; }
+    .lightbox-nav.next { right: 16px; }
+    .lightbox-nav:disabled { opacity: 0.2; cursor: default; }
+
+    .lightbox-footer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      padding: 20px;
+      flex-shrink: 0;
+    }
+    .lightbox-dot {
+      width: 5px; height: 5px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .lightbox-dot.active { background: #fff; }
+
+    @media (max-width: 768px) {
+      .lightbox-header { padding: 16px 20px; }
+      .lightbox-body { padding: 16px; }
+      .lightbox-title { font-size: 18px; }
+      .lightbox-nav { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -695,6 +836,26 @@
     </div>
   </section>
 
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-header">
+      <div>
+        <div class="lightbox-title" id="lightboxTitle"></div>
+        <div class="lightbox-desc" id="lightboxDesc"></div>
+      </div>
+      <button class="lightbox-close" id="lightboxClose">
+        Cerrar <span class="lightbox-close-icon"></span>
+      </button>
+    </div>
+    <div class="lightbox-body">
+      <button class="lightbox-nav prev" id="lightboxPrev">&#8592;</button>
+      <img class="lightbox-media" id="lightboxImg" src="" alt="" />
+      <video class="lightbox-video" id="lightboxVideo" autoplay loop muted playsinline style="display:none;max-height:80vh;"></video>
+      <button class="lightbox-nav next" id="lightboxNext">&#8594;</button>
+    </div>
+    <div class="lightbox-footer" id="lightboxDots"></div>
+  </div>
+
   <!-- FOOTER -->
   <footer>
     <span>© 2026 Rodri</span>
@@ -790,9 +951,11 @@
 
       // Re-observar los nuevos elementos
       grid.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-      grid.querySelectorAll('.project-card').forEach(el => {
+      grid.querySelectorAll('.project-card').forEach((el, i) => {
         el.addEventListener('mouseenter', () => cursor.classList.add('expanded'));
         el.addEventListener('mouseleave', () => cursor.classList.remove('expanded'));
+        el.addEventListener('click', () => openLightbox(projects[i]));
+        el.style.cursor = 'pointer';
       });
     }
 
@@ -833,6 +996,105 @@
 
     applyThemeToggle(toggle);
     applyThemeToggle(toggleMobile);
+
+    // ── LIGHTBOX ──
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxVideo = document.getElementById('lightboxVideo');
+    const lightboxTitle = document.getElementById('lightboxTitle');
+    const lightboxDesc = document.getElementById('lightboxDesc');
+    const lightboxDots = document.getElementById('lightboxDots');
+    const lightboxClose = document.getElementById('lightboxClose');
+    const lightboxPrev = document.getElementById('lightboxPrev');
+    const lightboxNext = document.getElementById('lightboxNext');
+
+    let currentProject = null;
+    let currentSlide = 0;
+
+    function getSlides(p) {
+      const slides = [];
+      if (p.video) slides.push({ type: 'video', src: p.video });
+      if (p.imagen) slides.push({ type: 'img', src: p.imagen });
+      if (p.imagenes) p.imagenes.forEach(s => slides.push({ type: 'img', src: s }));
+      if (slides.length === 0) slides.push({ type: 'placeholder' });
+      return slides;
+    }
+
+    function showSlide(slides, index) {
+      const slide = slides[index];
+      lightboxImg.classList.add('fading');
+      setTimeout(() => {
+        if (slide.type === 'video') {
+          lightboxImg.style.display = 'none';
+          lightboxVideo.style.display = 'block';
+          lightboxVideo.src = slide.src;
+          lightboxVideo.play();
+        } else {
+          lightboxVideo.style.display = 'none';
+          lightboxVideo.pause();
+          lightboxImg.style.display = 'block';
+          lightboxImg.src = slide.src;
+        }
+        lightboxImg.classList.remove('fading');
+      }, 150);
+
+      // Dots
+      lightboxDots.querySelectorAll('.lightbox-dot').forEach((d, i) => {
+        d.classList.toggle('active', i === index);
+      });
+
+      lightboxPrev.disabled = index === 0;
+      lightboxNext.disabled = index === slides.length - 1;
+    }
+
+    function openLightbox(project) {
+      currentProject = project;
+      currentSlide = 0;
+      const slides = getSlides(project);
+
+      lightboxTitle.textContent = project.titulo;
+      lightboxDesc.textContent = project.descripcion;
+
+      // Dots
+      lightboxDots.innerHTML = slides.length > 1
+        ? slides.map((_, i) => `<div class="lightbox-dot${i === 0 ? ' active' : ''}"></div>`).join('')
+        : '';
+      lightboxDots.querySelectorAll('.lightbox-dot').forEach((d, i) => {
+        d.addEventListener('click', () => { currentSlide = i; showSlide(slides, i); });
+      });
+
+      showSlide(slides, 0);
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+
+      lightboxPrev.onclick = () => { if (currentSlide > 0) { currentSlide--; showSlide(slides, currentSlide); } };
+      lightboxNext.onclick = () => { if (currentSlide < slides.length - 1) { currentSlide++; showSlide(slides, currentSlide); } };
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      lightboxVideo.pause();
+      document.body.style.overflow = '';
+    }
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', e => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft' && currentSlide > 0) { currentSlide--; showSlide(getSlides(currentProject), currentSlide); }
+      if (e.key === 'ArrowRight') { const s = getSlides(currentProject); if (currentSlide < s.length - 1) { currentSlide++; showSlide(s, currentSlide); } }
+    });
+
+    // Touch swipe en lightbox
+    let touchStartX = 0;
+    lightbox.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
+    lightbox.addEventListener('touchend', e => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      const slides = getSlides(currentProject);
+      if (diff > 50 && currentSlide < slides.length - 1) { currentSlide++; showSlide(slides, currentSlide); }
+      if (diff < -50 && currentSlide > 0) { currentSlide--; showSlide(slides, currentSlide); }
+    });
   </script>
 </body>
 </html>
