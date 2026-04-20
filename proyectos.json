@@ -1,0 +1,82 @@
+[
+  {
+    "titulo": "Colaboradores MercadoLibre",
+    "descripcion": "UX · Product Design · 2024",
+    "rol": "Senior UX Designer",
+    "año": "2024",
+    "imagen": "imagenes/proyecto1.jpg",
+    "objetivo": "Rediseñar el flujo de colaboradores para mejorar la experiencia de los usuarios internos, reduciendo la fricción en las tareas más frecuentes.",
+    "analisis": "A partir de entrevistas con usuarios y análisis de datos de uso, identificamos los principales puntos de dolor: navegación confusa, falta de feedback visual y flujos incompletos. Definimos oportunidades de mejora priorizando impacto y esfuerzo.",
+    "imagenes": [
+      "imagenes/proyecto1-a.jpg",
+      "imagenes/proyecto1-b.jpg"
+    ],
+    "layout": ""
+  },
+  {
+    "titulo": "Login & Seguridad",
+    "descripcion": "UX · Mobile · 2023",
+    "rol": "Senior UX Designer",
+    "año": "2023",
+    "imagen": "imagenes/proyecto2.jpg",
+    "objetivo": "Simplificar el proceso de autenticación manteniendo los estándares de seguridad requeridos por la plataforma.",
+    "analisis": "Analizamos el funnel de login y detectamos una tasa de abandono elevada en el paso de verificación. Exploramos alternativas más amigables sin comprometer la seguridad.",
+    "imagenes": [
+      "imagenes/proyecto2-a.jpg",
+      "imagenes/proyecto2-b.jpg"
+    ],
+    "layout": ""
+  },
+  {
+    "titulo": "Validación de Identidad",
+    "descripcion": "UX · Face ID · Document Scan · 2023",
+    "rol": "Senior UX Designer",
+    "año": "2023",
+    "imagen": "imagenes/proyecto3.jpg",
+    "objetivo": "Diseñar un flujo de validación de identidad claro y accesible, reduciendo errores durante el escaneo de documentos y reconocimiento facial.",
+    "analisis": "Testing con usuarios reveló confusión en las instrucciones de captura. Rediseñamos el feedback en tiempo real y simplificamos los pasos requeridos.",
+    "imagenes": [
+      "imagenes/proyecto3-a.jpg",
+      "imagenes/proyecto3-b.jpg"
+    ],
+    "layout": ""
+  },
+  {
+    "titulo": "Preguntados 2",
+    "descripcion": "UI · Game Design · 2020",
+    "rol": "Design Lead",
+    "año": "2020",
+    "imagen": "imagenes/proyecto4.jpg",
+    "objetivo": "Rediseñar la interfaz del juego para mejorar la legibilidad, el ritmo de juego y la coherencia visual entre plataformas.",
+    "analisis": "Con el equipo de arte definimos un nuevo sistema de componentes adaptable a los distintos modos de juego, integrando feedback de la comunidad y métricas de retención.",
+    "imagenes": [
+      "imagenes/proyecto4-a.jpg",
+      "imagenes/proyecto4-b.jpg"
+    ],
+    "layout": ""
+  },
+  {
+    "titulo": "Motion & Branding",
+    "descripcion": "Motion Graphics · 2019",
+    "rol": "Motion Graphic Designer",
+    "año": "2019",
+    "imagen": "imagenes/proyecto5.jpg",
+    "objetivo": "Desarrollar la identidad en movimiento del canal, creando una librería de animaciones reutilizables para todos los programas.",
+    "analisis": "Definimos un sistema de motion basado en la paleta cromática y tipografía institucional, generando plantillas editables para los distintos formatos de emisión.",
+    "imagenes": [
+      "imagenes/proyecto5-a.jpg"
+    ],
+    "layout": ""
+  },
+  {
+    "titulo": "Micro-interacción Login",
+    "descripcion": "Motion · UI · 2024",
+    "rol": "Senior UX Designer",
+    "año": "2024",
+    "imagen": "imagenes/login-poster.jpg",
+    "objetivo": "Diseñar micro-interacciones que den feedback claro al usuario durante el proceso de autenticación, reduciendo la incertidumbre.",
+    "analisis": "Identificamos momentos clave donde el usuario necesitaba confirmación visual. Diseñamos animaciones sutiles que comunican estado sin distraer del flujo principal.",
+    "video": "imagenes/apertura.mp4",
+    "layout": ""
+  }
+]
