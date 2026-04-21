@@ -139,6 +139,26 @@
     }
     .reveal.visible { opacity: 1; transform: none; }
 
+/* Para navegadores basados en Webkit (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 12px; /* Ancho de la barra */
+}
+
+::-webkit-scrollbar-track {
+  background: #f0f0f0; /* COLOR DE FONDO DE TU PÁGINA */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #f0f0f0; /* Mismo color para ocultar la parte móvil */
+  border-radius: 10px;
+}
+
+/* Para Firefox */
+html {
+  scrollbar-color: #f0f0f0 #f0f0f0; /* color-thumb color-track */
+}
+
+
     /* ════════════ INDEX ════════════ */
     .hero {
       min-height: 100svh; display: flex; flex-direction: column;
