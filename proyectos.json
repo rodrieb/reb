@@ -56,16 +56,14 @@
     "layout": ""
   },
   {
-    "titulo": "Motion & Branding",
-    "descripcion": "Motion Graphics · 2019",
+    "titulo": "Micro-interacción Pagos NFC",
+    "descripcion": "Motion Graphics · 2024",
     "rol": "Motion Graphic Designer",
-    "año": "2019",
-    "imagen": "imagenes/proyecto5.jpg",
-    "objetivo": "Desarrollar la identidad en movimiento del canal, creando una librería de animaciones reutilizables para todos los programas.",
+    "año": "2024",
+    "imagen": "imagenes/nfc.jpg",
+    "objetivo": "Diseñar micro-interacciones que den feedback claro al usuario durante el proceso de pago de NFC, reduciendo la incertidumbre y claridad del proceso.",
     "analisis": "Definimos un sistema de motion basado en la paleta cromática y tipografía institucional, generando plantillas editables para los distintos formatos de emisión.",
-    "imagenes": [
-      "imagenes/proyecto5-a.jpg"
-    ],
+    "video": "imagenes/pagonfc.mp4",
     "layout": ""
   },
   {
