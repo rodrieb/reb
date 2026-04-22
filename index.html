@@ -424,6 +424,100 @@ html {
       margin: 0 auto;
     }
 
+    /* ── CV BUTTON ── */
+    .cv-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      margin-top: 32px; background: none; border: 1px solid var(--line);
+      color: var(--muted); font-family: var(--font-mono);
+      font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 14px 24px; border-radius: var(--radius); cursor: pointer;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .cv-btn:hover { border-color: var(--ink); color: var(--ink); background: var(--ink); color: var(--bg); }
+
+    /* ── CV VIEW ── */
+    #cvView {
+      display: none; position: fixed; inset: 0; z-index: 500;
+      background: var(--bg); overflow-y: auto;
+      transition: background-color 0.6s ease;
+      animation: slideUp 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    #cvView.open { display: block; }
+
+    .cv-body {
+      max-width: 800px; margin: 0 auto; padding: 60px 48px 100px;
+    }
+
+    .cv-header {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end;
+      margin-bottom: 48px;
+    }
+    .cv-name {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 6vw, 80px);
+      font-weight: 300; line-height: 0.95;
+    }
+    .cv-name em { font-style: italic; color: var(--muted); }
+    .cv-header-meta { display: flex; flex-direction: column; gap: 6px; }
+    .cv-header-meta p { color: var(--muted); font-size: 12px; }
+    .cv-header-meta a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .cv-header-meta a:hover { color: var(--ink); }
+
+    .cv-intro {
+      margin-bottom: 48px;
+    }
+    .cv-intro p { color: var(--muted); line-height: 2; font-size: 14px; }
+
+    .cv-divider { border: none; border-top: 1px solid var(--line); margin: 0 0 48px; }
+
+    .cv-section { margin-bottom: 48px; }
+    .cv-section-label {
+      font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--accent); display: block; margin-bottom: 32px;
+    }
+
+    .cv-item { margin-bottom: 36px; padding-bottom: 36px; border-bottom: 1px solid var(--line); }
+    .cv-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+    .cv-item-header {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      gap: 20px; margin-bottom: 12px;
+    }
+    .cv-item-title {
+      display: block; font-family: var(--font-display); font-size: 22px;
+      font-weight: 300; color: var(--ink);
+    }
+    .cv-item-company {
+      display: block; font-size: 11px; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted); margin-top: 4px;
+    }
+    .cv-item-date {
+      font-size: 10px; letter-spacing: 0.08em; color: var(--muted);
+      white-space: nowrap; margin-top: 4px; flex-shrink: 0;
+    }
+    .cv-item-desc { color: var(--muted); line-height: 1.9; font-size: 13px; margin-bottom: 10px; }
+    .cv-item-list {
+      list-style: none; display: flex; flex-direction: column; gap: 4px;
+    }
+    .cv-item-list li {
+      font-size: 12px; color: var(--muted); padding-left: 14px; position: relative;
+    }
+    .cv-item-list li::before { content: '→'; position: absolute; left: 0; color: var(--accent); }
+
+    .cv-chips { display: flex; flex-wrap: wrap; gap: 10px; }
+    .cv-chip {
+      font-size: 11px; letter-spacing: 0.08em; color: var(--muted);
+      border: 1px solid var(--line); padding: 8px 14px;
+      border-radius: var(--radius);
+    }
+
+    @media (max-width: 768px) {
+      .cv-body { padding: 40px 24px 80px; }
+      .cv-header { grid-template-columns: 1fr; gap: 24px; }
+      .cv-item-header { flex-direction: column; gap: 6px; }
+      .cv-item-date { white-space: normal; }
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       nav { padding: 20px 24px; }
@@ -503,7 +597,6 @@ html {
       <h1 class="hero-title reveal">Design that<br /><em>thinks</em><br />before it speaks.</h1>
       <div class="hero-sub reveal">
         <p class="hero-desc">Diseño interfaces con foco en claridad, flujo y detalle. Trabajo en producto digital desde la estrategia hasta la interacción.</p>
-        <span class="hero-scroll">Scroll</span>
       </div>
     </section>
 
@@ -527,6 +620,9 @@ html {
           <div class="skill-item">Design Systems</div>
           <div class="skill-item">Interaction Design</div>
         </div>
+        <button class="cv-btn reveal" id="openCvBtn">
+          Mirá mi experiencia completa <span>→</span>
+        </button>
       </div>
     </section>
 
@@ -545,7 +641,163 @@ html {
     </footer>
   </div>
 
-  <!-- PROJECT VIEW -->
+  <!-- CV VIEW -->
+  <div id="cvView">
+    <div class="project-nav">
+      <button class="project-nav-back" id="cvBack">Volver</button>
+      <span class="project-nav-title">Rodrigo E. Bermudez</span>
+    </div>
+
+    <div class="cv-body">
+
+      <div class="cv-header">
+        <h1 class="cv-name">Rodrigo<br /><em>Ezequiel Bermudez</em></h1>
+        <div class="cv-header-meta">
+          <p>Senior UX Designer</p>
+          <p>Buenos Aires, Argentina</p>
+          <p><a href="mailto:b.rodrigo.e@gmail.com">b.rodrigo.e@gmail.com</a></p>
+          <p><a href="https://linkedin.com/in/rodrigoebermudez" target="_blank">LinkedIn</a></p>
+          <p><a href="https://www.behance.net/rodrigoebermudez" target="_blank">Behance</a></p>
+        </div>
+      </div>
+
+      <div class="cv-intro">
+        <p>Diseñador Gráfico SR con foco en UX/UI. Progresar, aprender y mejorar día a día es uno de mis objetivos prioritarios. Apuesto al trabajo en equipo, colaborativo y flexible, en busca de un excelente clima y desarrollo profesional.</p>
+      </div>
+
+      <hr class="cv-divider" />
+
+      <div class="cv-section">
+        <span class="cv-section-label">Experiencia</span>
+
+        <div class="cv-item">
+          <div class="cv-item-header">
+            <div>
+              <span class="cv-item-title">Senior UX Designer</span>
+              <span class="cv-item-company">Mercado Libre</span>
+            </div>
+            <span class="cv-item-date">May 2021 — Presente · 5 años</span>
+          </div>
+          <p class="cv-item-desc">Trabajo en iniciativas que involucran las experiencias de la sección Colaboradores. Aporto valor en micro interacciones, análisis de experiencias y mejoras de flujos.</p>
+          <ul class="cv-item-list">
+            <li>Login & Métodos de seguridad</li>
+            <li>Reautenticación de usuarios</li>
+            <li>Registro y cuentas</li>
+            <li>Validación de identidad: Scan de documento, Face ID</li>
+          </ul>
+        </div>
+
+        <div class="cv-item">
+          <div class="cv-item-header">
+            <div>
+              <span class="cv-item-title">Lead Graphic Artist</span>
+              <span class="cv-item-company">etermax</span>
+            </div>
+            <span class="cv-item-date">Ago 2020 — May 2021 · 10 meses</span>
+          </div>
+          <p class="cv-item-desc">Producciones artísticas colaborando con el CO y/o Principal en la definición estética del producto. Gestión de prioridades, coaching y mentoring del equipo de arte.</p>
+        </div>
+
+        <div class="cv-item">
+          <div class="cv-item-header">
+            <div>
+              <span class="cv-item-title">Design Lead</span>
+              <span class="cv-item-company">etermax</span>
+            </div>
+            <span class="cv-item-date">Mar 2020 — Ago 2020 · 6 meses</span>
+          </div>
+          <p class="cv-item-desc">Lideré uno de los Squads de arte de Preguntados 2. Diseño de UI y UX, integración de interfaces en Unity 3D.</p>
+        </div>
+
+        <div class="cv-item">
+          <div class="cv-item-header">
+            <div>
+              <span class="cv-item-title">UI Designer</span>
+              <span class="cv-item-company">etermax</span>
+            </div>
+            <span class="cv-item-date">Sep 2017 — Mar 2020 · 2 años 7 meses</span>
+          </div>
+          <p class="cv-item-desc">Desarrollo de diseño de UI para productos como Preguntados 2 y Orbital One. Análisis e implementación de prácticas de UX. Integración en Unity 3D.</p>
+        </div>
+
+        <div class="cv-item">
+          <div class="cv-item-header">
+            <div>
+              <span class="cv-item-title">Motion Graphic Designer</span>
+              <span class="cv-item-company">etermax</span>
+            </div>
+            <span class="cv-item-date">Feb 2017 — Sep 2017 · 8 meses</span>
+          </div>
+          <p class="cv-item-desc">Comunicación institucional para prensa y RRHH. Desarrollo de motion graphics (animaciones 2D), diseño gráfico institucional y social media.</p>
+        </div>
+
+        <div class="cv-item">
+          <div class="cv-item-header">
+            <div>
+              <span class="cv-item-title">Motion Graphic Designer</span>
+              <span class="cv-item-company">Artear</span>
+            </div>
+            <span class="cv-item-date">May 2013 — Ene 2017 · 3 años 9 meses</span>
+          </div>
+          <p class="cv-item-desc">Diseño de motion graphics. Desarrollo de la imagen del canal y sus programas de TV.</p>
+        </div>
+
+        <div class="cv-item">
+          <div class="cv-item-header">
+            <div>
+              <span class="cv-item-title">Graphic Designer</span>
+              <span class="cv-item-company">UTN Buenos Aires</span>
+            </div>
+            <span class="cv-item-date">Mar 2010 — May 2013 · 3 años 3 meses</span>
+          </div>
+          <p class="cv-item-desc">Manual de marca institucional, revista y diario institucional, diseño web, informe de gestión, carpetas, folletería, banners y papelería institucional.</p>
+        </div>
+      </div>
+
+      <hr class="cv-divider" />
+
+      <div class="cv-section">
+        <span class="cv-section-label">Educación</span>
+        <div class="cv-item">
+          <div class="cv-item-header">
+            <div>
+              <span class="cv-item-title">Diseñador Gráfico — Comunicación Visual</span>
+              <span class="cv-item-company">Fundación de Altos Estudios en Ciencias Comerciales</span>
+            </div>
+            <span class="cv-item-date">2008 — 2011</span>
+          </div>
+        </div>
+      </div>
+
+      <hr class="cv-divider" />
+
+      <div class="cv-section">
+        <span class="cv-section-label">Certificaciones</span>
+        <div class="cv-chips">
+          <span class="cv-chip">Experiencia de usuario (UX) esencial</span>
+          <span class="cv-chip">Experiencia de usuario (UX) avanzado</span>
+          <span class="cv-chip">Certificación en Motion Graphics</span>
+          <span class="cv-chip">Maquetado web</span>
+          <span class="cv-chip">Prácticas de UX</span>
+        </div>
+      </div>
+
+      <hr class="cv-divider" />
+
+      <div class="cv-section">
+        <span class="cv-section-label">Aptitudes principales</span>
+        <div class="cv-chips">
+          <span class="cv-chip">Diseño del movimiento</span>
+          <span class="cv-chip">Lottie</span>
+          <span class="cv-chip">Arquitectura de la información</span>
+          <span class="cv-chip">Product Design</span>
+          <span class="cv-chip">Interaction Design</span>
+          <span class="cv-chip">Design Systems</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
   <div id="projectView">
     <div class="project-nav">
       <button class="project-nav-back" id="projectBack">Volver</button>
@@ -732,7 +984,27 @@ html {
     document.getElementById('projectBack').addEventListener('click', closeProject);
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape' && projectView.classList.contains('open')) closeProject();
+      if (e.key === 'Escape' && document.getElementById('cvView').classList.contains('open')) closeCV();
     });
+
+    // ── CV VIEW ──
+    const cvView = document.getElementById('cvView');
+
+    function openCV() {
+      indexView.style.display = 'none';
+      cvView.classList.add('open');
+      cvView.scrollTop = 0;
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCV() {
+      cvView.classList.remove('open');
+      indexView.style.display = 'block';
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('openCvBtn').addEventListener('click', openCV);
+    document.getElementById('cvBack').addEventListener('click', closeCV);
   </script>
 </body>
 </html>
