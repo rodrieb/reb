@@ -426,14 +426,14 @@ html {
 
     /* ── CV BUTTON ── */
     .cv-btn {
-      display: inline-flex; align-items: center; gap: 10px;
-      margin-top: 32px; background: none; border: 1px solid var(--line);
-      color: var(--muted); font-family: var(--font-mono);
+      display: inline-flex; align-items: center;
+      margin-top: 32px; background: var(--accent); border: 1px solid var(--accent);
+      color: var(--bg); font-family: var(--font-mono);
       font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
       padding: 14px 24px; border-radius: var(--radius); cursor: pointer;
-      transition: border-color 0.2s, color 0.2s, background 0.2s;
+      transition: background 0.2s, color 0.2s;
     }
-    .cv-btn:hover { border-color: var(--ink); color: var(--ink); background: var(--ink); color: var(--bg); }
+    .cv-btn:hover { background: none; color: var(--accent); }
 
     /* ── CV VIEW ── */
     #cvView {
@@ -533,6 +533,7 @@ html {
 
       #about { grid-template-columns: 1fr; gap: 40px; padding: 72px 24px; }
       #contact { padding: 80px 24px; }
+      .contact-socials { flex-direction: column; align-items: center; gap: 16px; }
       footer { padding: 24px; flex-direction: column; gap: 12px; text-align: center; }
       .cursor { display: none; }
 
@@ -620,9 +621,7 @@ html {
           <div class="skill-item">Design Systems</div>
           <div class="skill-item">Interaction Design</div>
         </div>
-        <button class="cv-btn reveal" id="openCvBtn">
-          Mirá mi experiencia completa <span>→</span>
-        </button>
+        <button class="cv-btn reveal" id="openCvBtn">Mirá mi experiencia completa</button>
       </div>
     </section>
 
