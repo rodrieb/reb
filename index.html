@@ -449,24 +449,21 @@ html {
     }
 
     .cv-header {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end;
+      display: grid; grid-template-columns: 200px 1fr; gap: 40px; align-items: center;
       margin-bottom: 48px;
     }
-    .cv-name {
-      font-family: var(--font-display);
-      font-size: clamp(40px, 6vw, 80px);
-      font-weight: 300; line-height: 0.95;
+    .cv-photo {
+      width: 200px; height: 200px; object-fit: cover;
+      border-radius: var(--radius); display: block;
     }
-    .cv-name em { font-style: italic; color: var(--muted); }
-    .cv-header-meta { display: flex; flex-direction: column; gap: 6px; }
-    .cv-header-meta p { color: var(--muted); font-size: 12px; }
-    .cv-header-meta a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
-    .cv-header-meta a:hover { color: var(--ink); }
-
-    .cv-intro {
-      margin-bottom: 48px;
+    .cv-photo-placeholder {
+      width: 200px; height: 200px; background: var(--line);
+      border-radius: var(--radius); display: flex; align-items: center;
+      justify-content: center; color: var(--muted); font-size: 11px;
+      letter-spacing: 0.1em; text-transform: uppercase;
     }
-    .cv-intro p { color: var(--muted); line-height: 2; font-size: 14px; }
+    .cv-bio { display: flex; flex-direction: column; gap: 12px; }
+    .cv-bio-text { color: var(--muted); line-height: 2; font-size: 14px; }
 
     .cv-divider { border: none; border-top: 1px solid var(--line); margin: 0 0 48px; }
 
@@ -504,6 +501,27 @@ html {
     }
     .cv-item-list li::before { content: '→'; position: absolute; left: 0; color: var(--accent); }
 
+    .cv-section-dark {
+      background: #333333;
+      width: 100%;
+      padding: 48px 0 56px;
+      transition: background-color 0.6s ease;
+    }
+    html.drama .cv-section-dark { background: #2a2a2a; }
+    .cv-section-dark-inner {
+      max-width: 800px; margin: 0 auto; padding: 0 48px;
+    }
+    .cv-section-dark .cv-section-label { color: rgba(255,255,255,0.45); }
+    .cv-section-dark .cv-item-title { color: #f7f7f7; }
+    .cv-section-dark .cv-item-company { color: rgba(255,255,255,0.4); }
+    .cv-section-dark .cv-item-date { color: rgba(255,255,255,0.4); }
+    .cv-section-dark .cv-item { border-color: rgba(255,255,255,0.1); }
+    .cv-section-dark .cv-chip {
+      border-color: rgba(255,255,255,0.15); color: rgba(255,255,255,0.6);
+    }
+    .cv-subsection { margin-bottom: 36px; }
+    .cv-subsection:last-child { margin-bottom: 0; }
+
     .cv-chips { display: flex; flex-wrap: wrap; gap: 10px; }
     .cv-chip {
       font-size: 11px; letter-spacing: 0.08em; color: var(--muted);
@@ -514,6 +532,8 @@ html {
     @media (max-width: 768px) {
       .cv-body { padding: 40px 24px 80px; }
       .cv-header { grid-template-columns: 1fr; gap: 24px; }
+      .cv-photo, .cv-photo-placeholder { width: 120px; height: 120px; }
+      .cv-section-dark-inner { padding: 0 24px; }
       .cv-item-header { flex-direction: column; gap: 6px; }
       .cv-item-date { white-space: normal; }
     }
@@ -650,11 +670,12 @@ html {
     <div class="cv-body">
 
       <div class="cv-header">
-        <h1 class="cv-name">Rodrigo<br /><em>Ezequiel Bermudez</em></h1>
-      </div>
-
-      <div class="cv-intro">
-        <p>Diseñador Gráfico SR con foco en UX/UI. Progresar, aprender y mejorar día a día es uno de mis objetivos prioritarios. Apuesto al trabajo en equipo, colaborativo y flexible, en busca de un excelente clima y desarrollo profesional.</p>
+        <img src="imagenes/foto.jpg" class="cv-photo" alt="Rodrigo Bermudez"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+        <div class="cv-photo-placeholder" style="display:none">Foto</div>
+        <div class="cv-bio">
+          <p class="cv-bio-text">Diseñador Gráfico SR con foco en UX/UI. Progresar, aprender y mejorar día a día es uno de mis objetivos prioritarios. Apuesto al trabajo en equipo, colaborativo y flexible, en busca de un excelente clima y desarrollo profesional.</p>
+        </div>
       </div>
 
       <hr class="cv-divider" />
@@ -747,44 +768,49 @@ html {
         </div>
       </div>
 
-      <hr class="cv-divider" />
+    </div><!-- /cv-body -->
 
-      <div class="cv-intron">
-        <span class="cv-section-label">Educación</span>
-        <div class="cv-item">
-          <div class="cv-item-header">
-            <div>
-              <span class="cv-item-title">Diseñador Gráfico — Comunicación Visual</span>
-              <span class="cv-item-company">Fundación de Altos Estudios en Ciencias Comerciales</span>
+      <div class="cv-section-dark">
+        <div class="cv-section-dark-inner">
+          <div class="cv-subsection">
+            <span class="cv-section-label">Educación</span>
+            <div class="cv-item">
+              <div class="cv-item-header">
+                <div>
+                  <span class="cv-item-title">Diseñador Gráfico — Comunicación Visual</span>
+                  <span class="cv-item-company">Fundación de Altos Estudios en Ciencias Comerciales</span>
+                </div>
+                <span class="cv-item-date">2008 — 2011</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="cv-subsection">
+            <span class="cv-section-label">Certificaciones</span>
+            <div class="cv-chips">
+              <span class="cv-chip">Experiencia de usuario (UX) esencial</span>
+              <span class="cv-chip">Experiencia de usuario (UX) avanzado</span>
+              <span class="cv-chip">Certificación en Motion Graphics</span>
+              <span class="cv-chip">Maquetado web</span>
+              <span class="cv-chip">Prácticas de UX</span>
+            </div>
+          </div>
+
+          <div class="cv-subsection">
+            <span class="cv-section-label">Aptitudes principales</span>
+            <div class="cv-chips">
+              <span class="cv-chip">Diseño del movimiento</span>
+              <span class="cv-chip">Lottie</span>
+              <span class="cv-chip">Arquitectura de la información</span>
+              <span class="cv-chip">Product Design</span>
+              <span class="cv-chip">Interaction Design</span>
+              <span class="cv-chip">Design Systems</span>
             </div>
           </div>
         </div>
-      
-      <div class="cv-intro">
-        <span class="cv-section-label">Certificaciones</span>
-        <div class="cv-chips">
-          <span class="cv-chip">Experiencia de usuario (UX) esencial</span>
-          <span class="cv-chip">Experiencia de usuario (UX) avanzado</span>
-          <span class="cv-chip">Certificación en Motion Graphics</span>
-          <span class="cv-chip">Maquetado web</span>
-          <span class="cv-chip">Prácticas de UX</span>
-        </div>
       </div>
 
-      <div class="cv-intro">
-        <span class="cv-section-label">Aptitudes principales</span>
-        <div class="cv-chips">
-          <span class="cv-chip">Diseño del movimiento</span>
-          <span class="cv-chip">Lottie</span>
-          <span class="cv-chip">Arquitectura de la información</span>
-          <span class="cv-chip">Product Design</span>
-          <span class="cv-chip">Interaction Design</span>
-          <span class="cv-chip">Design Systems</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
+  </div><!-- /cvView -->
   <div id="projectView">
     <div class="project-nav">
       <button class="project-nav-back" id="projectBack">Volver</button>
