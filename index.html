@@ -538,6 +538,124 @@ html {
       .cv-item-date { white-space: normal; }
     }
 
+    /* ════════════ CASE STUDY ════════════ */
+    .cs-hero {
+      padding: 72px 48px 56px;
+      border-bottom: 1px solid var(--line);
+      display: grid; grid-template-columns: 1.2fr 0.8fr;
+      gap: 60px; align-items: end;
+    }
+    .cs-hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(48px, 7vw, 100px);
+      font-weight: 300; line-height: 0.95;
+    }
+    .cs-hero-title em { font-style: italic; color: var(--muted); }
+    .cs-hero-meta { display: flex; flex-direction: column; }
+    .cs-meta-row { padding: 16px 0; border-bottom: 1px solid var(--line); }
+    .cs-meta-row:last-child { border-bottom: none; }
+    .cs-meta-label {
+      font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--muted); display: block; margin-bottom: 4px;
+    }
+    .cs-meta-value { font-size: 13px; color: var(--ink); }
+
+    /* Cover full width */
+    .cs-cover {
+      width: 100%; max-height: 80vh; object-fit: cover; display: block;
+    }
+    .cs-cover-video {
+      width: 100%; max-height: 80vh; object-fit: cover; display: block;
+    }
+
+    /* Sección numerada: texto + imagen alternados */
+    .cs-section {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0; border-bottom: 1px solid var(--line);
+    }
+    .cs-section.reverse { direction: rtl; }
+    .cs-section.reverse > * { direction: ltr; }
+
+    .cs-section-text {
+      padding: 72px 48px;
+      display: flex; flex-direction: column; justify-content: center;
+      border-right: 1px solid var(--line);
+    }
+    .cs-section.reverse .cs-section-text { border-right: none; border-left: 1px solid var(--line); }
+
+    .cs-section-num {
+      font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 24px; display: block;
+    }
+    .cs-section-title {
+      font-family: var(--font-display); font-size: clamp(24px, 3vw, 40px);
+      font-weight: 300; line-height: 1.1; margin-bottom: 20px; color: var(--ink);
+    }
+    .cs-section-body {
+      color: var(--muted); line-height: 2; font-size: 14px;
+    }
+
+    .cs-section-visual {
+      overflow: hidden; background: var(--line);
+      min-height: 400px; display: flex; align-items: center; justify-content: center;
+    }
+    .cs-section-visual img,
+    .cs-section-visual video {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+
+    /* Full width block */
+    .cs-full {
+      width: 100%; border-bottom: 1px solid var(--line); overflow: hidden;
+    }
+    .cs-full img, .cs-full video {
+      width: 100%; display: block; max-height: 80vh; object-fit: cover;
+    }
+
+    /* Galería grilla */
+    .cs-gallery {
+      padding: 72px 48px;
+      border-bottom: 1px solid var(--line);
+    }
+    .cs-gallery-label {
+      font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 32px; display: block;
+    }
+    .cs-gallery-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    }
+    .cs-gallery-grid img {
+      width: 100%; height: auto; object-fit: cover;
+      border-radius: var(--radius); display: block;
+    }
+    .cs-gallery-grid img.full { grid-column: span 2; }
+
+    /* Video standalone */
+    .cs-video-wrap {
+      padding: 72px 48px; border-bottom: 1px solid var(--line);
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .cs-video-label {
+      font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 24px; display: block; align-self: flex-start;
+    }
+    .cs-video {
+      width: 100%; max-width: 420px; border-radius: var(--radius);
+      display: block; background: #000; margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+      .cs-hero { grid-template-columns: 1fr; gap: 32px; padding: 48px 20px 40px; }
+      .cs-section { grid-template-columns: 1fr; direction: ltr !important; }
+      .cs-section-text { padding: 48px 20px; border-right: none !important; border-left: none !important; border-bottom: 1px solid var(--line); }
+      .cs-section-visual { min-height: 260px; }
+      .cs-gallery { padding: 48px 20px; }
+      .cs-gallery-grid { grid-template-columns: 1fr; }
+      .cs-gallery-grid img.full { grid-column: span 1; }
+      .cs-video-wrap { padding: 48px 20px; }
+      .cs-video { max-width: 100%; }
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       nav { padding: 20px 24px; }
@@ -816,27 +934,7 @@ html {
       <button class="project-nav-back" id="projectBack">Volver</button>
       <span class="project-nav-title" id="projectNavTitle"></span>
     </div>
-
-    <div class="project-hero">
-      <h1 class="project-hero-title" id="projectTitle"></h1>
-      <div class="project-hero-meta" id="projectMeta"></div>
-    </div>
-
-    <div class="project-cover-wrap" id="projectCoverWrap"></div>
-
-    <div class="project-content" id="projectContent"></div>
-
-    <hr class="project-divider" id="projectDivider" style="display:none" />
-
-    <div class="project-gallery" id="projectGalleryWrap" style="display:none">
-      <span class="project-gallery-label">Pantallas</span>
-      <div class="gallery-grid" id="projectGallery"></div>
-    </div>
-
-    <div class="project-video-wrap" id="projectVideoWrap" style="display:none">
-      <span class="project-video-label">Video</span>
-      <video class="project-video" id="projectVideo" controls loop muted playsinline></video>
-    </div>
+    <div id="projectViewContent"></div>
   </div>
 
   <script>
@@ -925,61 +1023,93 @@ html {
     const projectView = document.getElementById('projectView');
 
     function openProject(p) {
-      document.getElementById('projectTitle').textContent = p.titulo;
       document.getElementById('projectNavTitle').textContent = p.titulo;
 
-      // Meta
-      const meta = document.getElementById('projectMeta');
-      meta.innerHTML = [
-        p.descripcion ? `<div class="project-meta-row"><span class="project-meta-label">Tipo</span><span class="project-meta-value">${p.descripcion}</span></div>` : '',
-        p.rol ? `<div class="project-meta-row"><span class="project-meta-label">Rol</span><span class="project-meta-value">${p.rol}</span></div>` : '',
-        p.año ? `<div class="project-meta-row"><span class="project-meta-label">Año</span><span class="project-meta-value">${p.año}</span></div>` : '',
-      ].join('');
+      let html = '';
+
+      // Hero
+      html += `<div class="cs-hero">
+        <h1 class="cs-hero-title">${p.titulo.replace(/([A-Z])/g, '<em>$1</em>').replace(/<em>/g,'<em>') || p.titulo}</h1>
+        <div class="cs-hero-meta">
+          ${p.descripcion ? `<div class="cs-meta-row"><span class="cs-meta-label">Tipo</span><span class="cs-meta-value">${p.descripcion}</span></div>` : ''}
+          ${p.rol ? `<div class="cs-meta-row"><span class="cs-meta-label">Rol</span><span class="cs-meta-value">${p.rol}</span></div>` : ''}
+          ${p.año ? `<div class="cs-meta-row"><span class="cs-meta-label">Año</span><span class="cs-meta-value">${p.año}</span></div>` : ''}
+        </div>
+      </div>`;
 
       // Cover
-      const coverWrap = document.getElementById('projectCoverWrap');
       if (p.imagen) {
-        coverWrap.innerHTML = `<img src="${p.imagen}" class="project-cover" alt="${p.titulo}" />`;
-        coverWrap.style.display = 'block';
-      } else if (p.video) {
-        coverWrap.innerHTML = `<video src="${p.video}" class="project-cover" autoplay loop muted playsinline></video>`;
-        coverWrap.style.display = 'block';
-      } else {
-        coverWrap.style.display = 'none';
+        html += `<div class="cs-full"><img src="${p.imagen}" alt="${p.titulo}" /></div>`;
       }
 
-      // Texto
-      const content = document.getElementById('projectContent');
-      let html = '';
-      if (p.objetivo) html += `<div class="project-section"><span class="project-section-label">Objetivo</span><p>${p.objetivo}</p></div>`;
-      if (p.analisis) html += `<div class="project-section"><span class="project-section-label">Análisis</span><p>${p.analisis}</p></div>`;
-      content.innerHTML = html;
-      content.style.display = html ? 'block' : 'none';
+      // Objetivo — texto izquierda, imagen derecha
+      if (p.objetivo) {
+        const img = p.imagenes && p.imagenes[0] ? `<div class="cs-section-visual"><img src="${p.imagenes[0]}" alt="Objetivo" loading="lazy" /></div>` : `<div class="cs-section-visual"></div>`;
+        html += `<div class="cs-section">
+          <div class="cs-section-text">
+            <span class="cs-section-num">01 — Objetivo</span>
+            <h2 class="cs-section-title">¿Cuál era el desafío?</h2>
+            <p class="cs-section-body">${p.objetivo}</p>
+          </div>
+          ${img}
+        </div>`;
+      }
 
-      // Galería
-      const galleryWrap = document.getElementById('projectGalleryWrap');
-      const gallery = document.getElementById('projectGallery');
-      if (p.imagenes && p.imagenes.length) {
-        gallery.innerHTML = p.imagenes.map((src, i) =>
-          `<img src="${src}" alt="Pantalla ${i+1}" loading="lazy" ${i === 0 ? 'class="full"' : ''} />`
-        ).join('');
-        galleryWrap.style.display = 'block';
-        document.getElementById('projectDivider').style.display = 'block';
-      } else {
-        galleryWrap.style.display = 'none';
-        document.getElementById('projectDivider').style.display = 'none';
+      // Análisis — imagen izquierda, texto derecha
+      if (p.analisis) {
+        const img = p.imagenes && p.imagenes[1] ? `<div class="cs-section-visual"><img src="${p.imagenes[1]}" alt="Análisis" loading="lazy" /></div>` : `<div class="cs-section-visual"></div>`;
+        html += `<div class="cs-section reverse">
+          <div class="cs-section-text">
+            <span class="cs-section-num">02 — Análisis</span>
+            <h2 class="cs-section-title">¿Cómo lo abordamos?</h2>
+            <p class="cs-section-body">${p.analisis}</p>
+          </div>
+          ${img}
+        </div>`;
+      }
+
+      // Secciones extra del JSON
+      if (p.secciones && p.secciones.length) {
+        p.secciones.forEach((sec, i) => {
+          if (sec.tipo === 'full-imagen' && sec.imagen) {
+            html += `<div class="cs-full"><img src="${sec.imagen}" alt="" loading="lazy" /></div>`;
+          } else if (sec.tipo === 'full-video' && sec.video) {
+            html += `<div class="cs-full"><video src="${sec.video}" autoplay loop muted playsinline></video></div>`;
+          } else if (sec.tipo === 'texto-imagen') {
+            const reverse = i % 2 !== 0 ? 'reverse' : '';
+            const visual = sec.imagen ? `<div class="cs-section-visual"><img src="${sec.imagen}" alt="" loading="lazy" /></div>` : `<div class="cs-section-visual"></div>`;
+            html += `<div class="cs-section ${reverse}">
+              <div class="cs-section-text">
+                <span class="cs-section-num">0${i + 3} — ${sec.label || 'Detalle'}</span>
+                ${sec.titulo ? `<h2 class="cs-section-title">${sec.titulo}</h2>` : ''}
+                <p class="cs-section-body">${sec.texto}</p>
+              </div>
+              ${visual}
+            </div>`;
+          }
+        });
+      }
+
+      // Galería extra (desde imagenes[2] en adelante)
+      const galeria = p.imagenes ? p.imagenes.slice(2) : [];
+      if (galeria.length) {
+        html += `<div class="cs-gallery">
+          <span class="cs-gallery-label">Pantallas</span>
+          <div class="cs-gallery-grid">
+            ${galeria.map((src, i) => `<img src="${src}" alt="Pantalla ${i+1}" loading="lazy" ${i === 0 ? 'class="full"' : ''} />`).join('')}
+          </div>
+        </div>`;
       }
 
       // Video
-      const videoWrap = document.getElementById('projectVideoWrap');
-      const videoEl = document.getElementById('projectVideo');
       if (p.video) {
-        videoEl.src = p.video;
-        videoWrap.style.display = 'block';
-      } else {
-        videoWrap.style.display = 'none';
+        html += `<div class="cs-video-wrap">
+          <span class="cs-video-label">Motion</span>
+          <video class="cs-video" src="${p.video}" controls loop muted playsinline></video>
+        </div>`;
       }
 
+      document.getElementById('projectViewContent').innerHTML = html;
       indexView.style.display = 'none';
       projectView.classList.add('open');
       projectView.scrollTop = 0;
@@ -990,8 +1120,8 @@ html {
       projectView.classList.remove('open');
       indexView.style.display = 'block';
       document.body.style.overflow = '';
-      document.getElementById('projectVideo').pause();
-      document.getElementById('projectVideo').src = '';
+      // Pausar videos
+      document.querySelectorAll('#projectView video').forEach(v => v.pause());
     }
 
     document.getElementById('projectBack').addEventListener('click', closeProject);
